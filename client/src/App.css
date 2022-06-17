@@ -1,0 +1,92 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  font-family: sans-serif;
+}
+
+.criptoInfo, .search  {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 290px;
+}
+
+  h2 {
+  font-size: 20px;
+}
+
+.search input {
+  width: 200px;
+  height: 20px;
+  padding-left: 10px;
+  margin: 5px;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  margin: 8px;
+}
+
+.searchButtons {
+  display: inline;
+}
+
+.criptoInfo input {
+  width: 200px;
+  height: 20px;
+  padding-left: 10px;
+  margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.inputs {
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.errMessage {
+  margin: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  min-width: 400px;
+
+}
+
+table thead tr {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #000000;
+}
