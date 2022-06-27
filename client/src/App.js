@@ -16,7 +16,6 @@ function App() {
 
   const [selectCoinId, setSelectCoinId] = useState(null);
 
-
   const [errMessage, setErrMessage] = useState('');
 
   const [selectInputValue, setSelectInputValue] = useState('');
@@ -39,7 +38,7 @@ function App() {
     setSelectInputValue(fieldValue);
   }
 
-  const addCoin = () => {
+  function addCoin() {
     setSelectCoinId(null)
     let invalid = false;
     setErrMessage('');
@@ -59,47 +58,51 @@ function App() {
       name: CoinData.name, 
       cod: CoinData.cod, 
       price: CoinData.price
+    }).then((response) => {
+      setCoinList(response.data)
     });
-    getCoins();
+    setSelectCoinId(null);
   } else {
     setErrMessage('Por favor preencha todos os campos');
-  }
-    
+  }    
   };
 
-  const getCoins = () => {
+  function getCoins() {
+    setSelectCoinId(null);
     Axios.get('http://localhost:3001/coins').then((response) => {
+      setCoinList(response.data);
+    });
+  };
+
+  function updateCoin() {
+    Axios.put(`http://localhost:3001/update/${selectCoinId}`, {
+      name: CoinData.name, 
+      cod: CoinData.cod, 
+      price: CoinData.price
+    }).then((response) => {
       setCoinList(response.data);
     });
     setSelectCoinId(null);
   };
 
-  const updateCoin = () => {
-    Axios.put(`http://localhost:3001/update/${selectCoinId}`, {
-      name: CoinData.name, 
-      cod: CoinData.cod, 
-      price: CoinData.price
+  function deleteCoin() {
+    Axios.delete(`http://localhost:3001/delete/${selectCoinId}`).then((response) => {
+      setCoinList(response.data);
     });
     setSelectCoinId(null);
-    getCoins();
-  }
-
-  const deleteCoin = () => {
-    Axios.delete(`http://localhost:3001/delete/${selectCoinId}`);
-    setSelectCoinId(null); 
-    getCoins();
   };
 
-  const cancelSelect = () => {
+  function cancelSelect() {
     setSelectCoinId(null); 
-  }
+  };
 
-  const selectByName = () => {
+  function selectByName() {
+    setSelectCoinId(null);
     Axios.get(`http://localhost:3001/coins/${selectInputValue}`, {
     }).then((response) => {
     setCoinList(response.data);
     })
-    setSelectCoinId(null);
+
   };
 
   return (
@@ -151,13 +154,11 @@ function App() {
         <tbody>
         {coinList.map((val, key) => {
           return <tr 
-            //className='coin'
             onClick={() => {
               setSelectCoinId(val.id)
               setErrMessage('');            
             }}
             style={{
-              //color: selectCoinId === val.id ? 'black' : '',
               fontWeight: selectCoinId === val.id ? 'bold' : '',
             }}
           > 
